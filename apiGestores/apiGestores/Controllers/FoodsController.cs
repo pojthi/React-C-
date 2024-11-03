@@ -12,10 +12,10 @@ using Microsoft.EntityFrameworkCore;
 namespace apiGestores.Controllers
 {
     [Route("api/[controller]")]
-    public class GestoresController : Controller
+    public class FoodsController : Controller
     {
         private readonly AppDbContext context;
-        public GestoresController(AppDbContext context)
+        public FoodsController(AppDbContext context)
         {
             this.context = context;
         }
@@ -25,7 +25,7 @@ namespace apiGestores.Controllers
         {
             try
             {
-                return Ok(context.gestores_bd.ToList());
+                return Ok(context.foods.ToList());
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -33,13 +33,13 @@ namespace apiGestores.Controllers
         }
 
         // GET api/<controller>/5
-        [HttpGet("{id}", Name ="GetGestor")]
+        [HttpGet("{id}", Name ="Foods")]
         public ActionResult Get(int id)
         {
             try
             {
-                var gestor = context.gestores_bd.FirstOrDefault(g => g.id == id);
-                return Ok(gestor);
+                var foods = context.foods.FirstOrDefault(g => g.Id == id);
+                return Ok(foods);
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -48,13 +48,13 @@ namespace apiGestores.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public ActionResult Post([FromBody]Gestores_Bd gestor)
+        public ActionResult Post([FromBody]Foods foods)
         {
             try
             {
-                context.gestores_bd.Add(gestor);
+                context.foods.Add(foods);
                 context.SaveChanges();
-                return CreatedAtRoute("GetGestor", new { id = gestor.id }, gestor);
+                return CreatedAtRoute("Foods", new { id = foods.Id }, foods);
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -63,15 +63,15 @@ namespace apiGestores.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody]Gestores_Bd gestor)
+        public ActionResult Put(int id, [FromBody]Foods foods)
         {
             try
             {
-                if (gestor.id == id)
+                if (foods.Id == id)
                 {
-                    context.Entry(gestor).State = EntityState.Modified;
+                    context.Entry(foods).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetGestor", new { id = gestor.id }, gestor);
+                    return CreatedAtRoute("Foods", new { id = foods.Id }, foods);
                 }
                 else
                 {
@@ -90,10 +90,10 @@ namespace apiGestores.Controllers
         {
             try
             {
-                var gestor = context.gestores_bd.FirstOrDefault(g => g.id == id);
-                if (gestor != null)
+                var foods = context.foods.FirstOrDefault(g => g.Id == id);
+                if (foods != null)
                 {
-                    context.gestores_bd.Remove(gestor);
+                    context.foods.Remove(foods);
                     context.SaveChanges();
                     return Ok(id);
                 }

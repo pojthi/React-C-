@@ -13,6 +13,6 @@ namespace apiGestores.Context
         {
 
         }
-        public DbSet<Gestores_Bd> gestores_bd { get; set; }
+        public DbSet<Foods> foods { get; set; }
     }
 }

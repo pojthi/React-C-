@@ -10,8 +10,7 @@
     },
     "mssql": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:Conexion",
-      "dynamicId": null
+      "connectionId": "ConnectionStrings:Conexion"
     }
   }
 }
